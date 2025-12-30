@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Misión Especial</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+    input {
+      padding: 10px;
+      width: 80%;
+      border-radius: 5px;
+      border: none;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background: gold;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box" id="game">
+  <h2>💛 Misión Especial</h2>
+  <p>Para conseguir tu regalo tendrás que superar 3 pruebas 😈</p>
+  <button onclick="next()">Empezar</button>
+</div>
+
+<script>
+let step = 0;
+
+function next() {
+  const game = document.getElementById("game");
+
+  if (step === 0) {
+    game.innerHTML = `
+      <h3>Prueba 1</h3>
+      <p>Adivina el código:</p>
+      <p><b>Si hoy es ayer del mañana, ¿qué día fue anteayer?</b></p>
+      <input id="answer">
+      <button onclick="check1()">Enviar</button>
+    `;
+  }
+
+  step++;
+}
+
+function check1() {
+  const val = document.getElementById("answer").value.toLowerCase().trim();
+
+  if (val.includes("ayer")) {
+    const game = document.getElementById("game");
+    game.innerHTML = `
+      <h3>Prueba 2</h3>
+      <p>Pregunta de lógica:</p>
+      <p><b>¿Qué número sigue en la serie?</b></p>
+      <p><b>2, 6, 12, 20, ?</b></p>
+      <p>
+        A) 28<br>
+        B) 30<br>
+        C) 32
+      </p>
+      <input id="answer2" placeholder="Escribe A, B o C">
+      <button onclick="check2()">Enviar</button>
+    `;
+  } else {
+    alert("Nope 😈 piensa bien en los días");
+  }
+}
+
+function check2() {
+  const val = document.getElementById("answer2").value.toLowerCase().trim();
+
+  if (val === "b") {
+    const game = document.getElementById("game");
+    game.innerHTML = `
+      <h3>Prueba 3</h3>
+      <p>Última prueba 💛</p>
+      <p>Escribe algo que te gustaría hacer conmigo:</p>
+      <input id="answer3" placeholder="Cualquier cosa vale">
+      <button onclick="check3()">Enviar</button>
+    `;
+  } else {
+    alert("No es correcta… revisa el patrón 🔍");
+  }
+}
+
+function check3() {
+  win();
+}
+
+function win() {
+  const game = document.getElementById("game");
+  game.innerHTML = `
+    <h2>🎉 Enhorabuena</h2>
+    <p><b>Estás preparada.</b></p>
+    <p>Tu regalo es:</p>
+    <h3>🧩 UN ESCAPE ROOM EN MÁLAGA 🧩</h3>
+    <img src="image.jpg" alt="Escape Room" style="width: 100%; margin-top: 20px; border-radius: 10px;">
+  `;
+}
+</script>
+
+</body>
+</html>
